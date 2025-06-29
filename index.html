@@ -5,27 +5,17 @@
     <meta charset="UTF-8" />
     <title>VozGo – Asistente de Citas</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="icon" href="icon-192.png" type="image/png" />
-    <link rel="manifest" href="vozgo-manifest.json" />
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
     <main class="container">
-        <section class="card">
-            <h1>🎙️ <span class="highlight">VozGo</span> – Asistente de Citas</h1>
-            <button id="escuchar">🎧 Escuchar</button>
-            <div id="resultado" class="output"></div>
-        </section>
+        <h1>🎙️ <span class="highlight">VozGo</span> – Asistente de Citas</h1>
+        <button id="escuchar">🎧 Escuchar</button>
+        <div id="resultado" class="output"></div>
     </main>
 
-    <!-- Supabase CDN tradicional -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <!-- Variables de config -->
-    <script src="config.js"></script>
-    <!-- Script principal -->
-    <script src="asistente.js"></script>
+    <script type="module" src="asistente.js"></script>
 </body>
 
 </html>
