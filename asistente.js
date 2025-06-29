@@ -1,5 +1,3 @@
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
 const escucharBtn = document.getElementById('escuchar');
 const resultadoDiv = document.getElementById('resultado');
 
