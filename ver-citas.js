@@ -1,30 +1,41 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    const tabla = document.querySelector("#tablaCitas tbody");
+const supabase = supabaseClient(supabaseUrl, supabaseKey);
 
-    const { data, error } = await window.supabase
-        .from("appointments")
-        .select("*")
-        .order("created_at", { ascending: false });
+// Obtener referencia al cuerpo de la tabla
+const tablaBody = document.querySelector('#tablaCitas tbody');
+
+// Función para cargar y mostrar las citas
+async function cargarCitas() {
+    const { data, error } = await supabase
+        .from('appointments')
+        .select('*')
+        .order('date', { ascending: true });
 
     if (error) {
-        console.error("❌ Error al cargar las citas:", error);
-        tabla.innerHTML = "<tr><td colspan='4'>Error al cargar citas</td></tr>";
+        console.error('Error al obtener citas:', error.message);
+        tablaBody.innerHTML = '<tr><td colspan="4">❌ Error al cargar citas</td></tr>';
         return;
     }
 
-    if (data.length === 0) {
-        tabla.innerHTML = "<tr><td colspan='4'>No hay citas registradas.</td></tr>";
+    if (!data || data.length === 0) {
+        tablaBody.innerHTML = '<tr><td colspan="4">No hay citas registradas.</td></tr>';
         return;
     }
 
-    data.forEach(cita => {
-        const fila = document.createElement("tr");
+    // Limpiar tabla
+    tablaBody.innerHTML = '';
+
+    // Insertar cada cita en la tabla
+    data.forEach((cita) => {
+        const fila = document.createElement('tr');
         fila.innerHTML = `
       <td>${cita.user_name}</td>
       <td>${cita.date}</td>
       <td>${cita.time}</td>
       <td>${cita.description}</td>
     `;
-        tabla.appendChild(fila);
+        tablaBody.appendChild(fila);
     });
-});
+}
+
+// Llamar a la función al cargar
+cargarCitas();
