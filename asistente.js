@@ -1,7 +1,7 @@
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 import { supabaseUrl, supabaseKey } from './config.js';
 
-const supabase = createClient(supabaseUrl, supabaseKey);
+// Usa el cliente Supabase del CDN (ya cargado en index.html)
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 const escucharBtn = document.getElementById('escuchar');
 const resultadoDiv = document.getElementById('resultado');
@@ -12,7 +12,7 @@ reconocimiento.interimResults = false;
 reconocimiento.maxAlternatives = 1;
 
 escucharBtn.addEventListener('click', () => {
-    resultadoDiv.innerHTML = '🎧 Escuchando...';
+    resultadoDiv.innerHTML = '';
     reconocimiento.start();
 });
 
@@ -21,7 +21,6 @@ reconocimiento.onresult = async (event) => {
     resultadoDiv.innerHTML = `🗒️ Tú dijiste: "${texto}"`;
 
     const datos = extraerDatos(texto);
-    console.log('📦 Datos extraídos:', datos);
 
     if (datos.user_name && datos.date && datos.time) {
         const { error } = await supabase.from('appointments').insert([
@@ -35,7 +34,7 @@ reconocimiento.onresult = async (event) => {
 
         if (error) {
             alert('❌ Error al guardar la cita');
-            console.error('Error Supabase:', error);
+            console.error(error);
         } else {
             alert('✅ Cita guardada con éxito!');
         }
@@ -48,7 +47,7 @@ reconocimiento.onerror = (event) => {
     resultadoDiv.innerHTML = `❌ Error al reconocer: ${event.error}`;
 };
 
-// 🧠 Función para extraer nombre, fecha y hora
+// Función para extraer nombre, fecha y hora
 function extraerDatos(texto) {
     let nombreMatch = texto.match(/soy (\w+)/i);
     let fechaMatch = texto.match(/el (\d{1,2} de \w+)/i);
