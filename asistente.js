@@ -1,6 +1,3 @@
-import { supabaseUrl, supabaseKey } from './config.js';
-
-// Usa el cliente Supabase del CDN (ya cargado en index.html)
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 const escucharBtn = document.getElementById('escuchar');
