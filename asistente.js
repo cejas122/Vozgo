@@ -1,7 +1,4 @@
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
-import { supabaseUrl, supabaseKey } from './config.js'
-
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 const escucharBtn = document.getElementById('escuchar');
 const resultadoDiv = document.getElementById('resultado');
@@ -47,7 +44,6 @@ reconocimiento.onerror = (event) => {
     resultadoDiv.innerHTML = `❌ Error al reconocer: ${event.error}`;
 };
 
-// Función para extraer nombre, fecha y hora
 function extraerDatos(texto) {
     let nombreMatch = texto.match(/soy (\w+)/i);
     let fechaMatch = texto.match(/el (\d{1,2} de \w+)/i);
