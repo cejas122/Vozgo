@@ -1,4 +1,6 @@
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+import { supabaseUrl, supabaseKey } from './config.js';
+
+const client = window.supabase.createClient(supabaseUrl, supabaseKey);
 
 const escucharBtn = document.getElementById('escuchar');
 const resultadoDiv = document.getElementById('resultado');
