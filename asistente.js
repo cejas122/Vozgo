@@ -1,6 +1,7 @@
-import { supabaseUrl, supabaseKey } from './config.js';
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+import { supabaseUrl, supabaseKey } from './config.js'
 
-const client = window.supabase.createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const escucharBtn = document.getElementById('escuchar');
 const resultadoDiv = document.getElementById('resultado');
